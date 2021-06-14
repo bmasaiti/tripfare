@@ -1,0 +1,15 @@
+#spring:
+#  application:
+#    name:tripfare
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/faredb
+#    username: postgres
+#    password: mysecretpassword
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#
+#
