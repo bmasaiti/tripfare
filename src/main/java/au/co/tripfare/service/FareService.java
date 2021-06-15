@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface FareService {
 
-     Trip processTap(Tap tap, List<Trip> incompleteTrips);
-     Trip addtoIncompleteTrips(Tap tap);
+    Trip processTap(Tap tap, List<Trip> incompleteTrips);
+
+    Trip addtoIncompleteTrips(Tap tap);
 }

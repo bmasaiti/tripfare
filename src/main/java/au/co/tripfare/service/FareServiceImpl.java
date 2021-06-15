@@ -4,44 +4,44 @@ import au.co.tripfare.entities.Tap;
 import au.co.tripfare.entities.Trip;
 import au.co.tripfare.repository.FareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import utils.TripStatus;
+
 import java.util.List;
 
-
+ @Service
 public class FareServiceImpl implements FareService {
 
-    @Autowired
+   @Autowired
     FareRepository fareRepository;
 
     @Override
     public Trip processTap(Tap tap, List<Trip> incompleteTrips) {
-            var unprocessedTrip = incompleteTrips.stream()
-                    .filter(trip -> trip.getPan().equalsIgnoreCase(tap.getPan()))
-                    .findFirst().orElse(null);
+        var unprocessedTrip = incompleteTrips.stream()
+                .filter(trip -> trip.getPan().equalsIgnoreCase(tap.getPan()))
+                .findFirst().orElse(null);
 
-            if (null != unprocessedTrip) {
-                var tripStatus = checkTripStatus(unprocessedTrip, tap);
-                unprocessedTrip.setTripStatus(tripStatus);
-                var fareValue = calculateFare(unprocessedTrip.getFromStop(), tap.getStopId(), tripStatus);
-                unprocessedTrip.setChargeAmount(fareValue);
-                unprocessedTrip.setToStop(tap.getStopId());
-                unprocessedTrip.setEndTime(tap.getTapTime());
-                incompleteTrips.remove(unprocessedTrip);
-            }
-          return unprocessedTrip;
+        if (null != unprocessedTrip) {
+            var tripStatus = checkTripStatus(unprocessedTrip, tap);
+            unprocessedTrip.setTripStatus(tripStatus);
+            var fareValue = calculateFare(unprocessedTrip.getFromStop().trim().toLowerCase(), tap.getStopId().trim().toLowerCase(), tripStatus);
+            unprocessedTrip.setChargeAmount(fareValue);
+            unprocessedTrip.setToStop(tap.getStopId());
+            unprocessedTrip.setEndTime(tap.getTapTime());
+            incompleteTrips.remove(unprocessedTrip);
         }
-
-
+        return unprocessedTrip;
+    }
 
 
     public Trip addtoIncompleteTrips(Tap tap) {
-          return        Trip.builder()
-                        .busId(tap.getBusId())
-                        .companyId(tap.getCompanyId())
-                        .pan(tap.getPan())
-                        .FromStop(tap.getStopId()).startTime(tap.getTapTime())
-                        .tripStatus(TripStatus.INCOMPLETE)
-                        .build()  ;
+        return Trip.builder()
+                .busId(tap.getBusId())
+                .companyId(tap.getCompanyId())
+                .pan(tap.getPan())
+                .FromStop(tap.getStopId()).startTime(tap.getTapTime())
+                .tripStatus(TripStatus.INCOMPLETE)
+                .build();
 
 
     }
@@ -60,16 +60,12 @@ public class FareServiceImpl implements FareService {
     private double calculateFare(String fromStop, String toStop, TripStatus tripStatus) {
         double fareValue = 0.0;
         if ((tripStatus.equals(TripStatus.COMPLETED)) && fromStop == toStop) {
-            var fare = fareRepository.findMaxFare();
-            fareValue =fare.getFareValue();
+            fareValue = fareRepository.findMaxFare().getFareValue();
         } else if ((tripStatus.equals(TripStatus.COMPLETED)) && fromStop != toStop) {
-            System.out.println("Stops"+fromStop +""+toStop);
-            var fare = fareRepository.findByFromStopANDToStop(fromStop, toStop) ;
-            fareValue =fare.getFareValue();
+            fareValue = fareRepository. findByFromStopANDToStop(fromStop, toStop).get(0).getFareValue();
         }
         return fareValue;
     }
-
 
 
 }

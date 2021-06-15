@@ -8,19 +8,20 @@ import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 import java.io.*;
 import java.util.List;
 
 public class TripFileProcessor {
 
-    public static List<Tap> readTapsFromFile(String fileName) throws FileNotFoundException{
+    public static List<Tap> readTapsFromFile(String fileName) throws FileNotFoundException {
 
-            List taps = new CsvToBeanBuilder(
-                    new FileReader(fileName))
-                    .withType(Tap.class)
-                    .build()
-                    .parse();
-            return taps;
+        List taps = new CsvToBeanBuilder(
+                new FileReader(fileName))
+                .withType(Tap.class)
+                .build()
+                .parse();
+        return taps;
 
     }
 

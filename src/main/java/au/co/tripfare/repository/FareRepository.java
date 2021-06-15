@@ -6,15 +6,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+
 @Repository
-public interface FareRepository extends JpaRepository<Fare,Integer> {
+public interface FareRepository extends JpaRepository<Fare, Integer> {
+ //Select f from Fare f where f.fromStop ='stop1'  and f.toStop = 'stop2';
 
-    @Query(value = "Select f from Fare where f.fromStop = ?1 and f.toStop =?2")
-    Fare findByFromStopANDToStop(String fromStop,String toStop);
+   @Query(nativeQuery= true, value = "Select f from Fare f where f.fromstop = :fromstop and f.tostop = :tostop")
+    List<Fare> findByFromStopANDToStop(String fromstop, String tostop);
 
-    @Query(value = "Select max(fareValue) from Fare")
+    @Query(nativeQuery = true, value = "Select max(farevalue) from Fare")
     Fare findMaxFare();
 
-    @Query(nativeQuery = true, value = "Select max(fareValue) from Fare where fromStop = :stopId")
-            Fare getMaxFareFromStop(String stopId);
+    @Query(nativeQuery = true, value = "Select max(farevalue) from Fare where fromstop = :stopId")
+    Fare getMaxFareFromStop(String stopId);
 }

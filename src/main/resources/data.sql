@@ -14,4 +14,28 @@ insert into fare values (2,'stop1','stop3',7.30);
 insert into fare values (3,'stop2','stop3',5.50);
 
 
-Select f from Fare where f.fromStop ='stop1'  and f.toStop = 'stop2';
+Select f from Fare f where f.fromStop ='stop1'  and f.toStop = 'stop2';
+
+
+select
+    f.farevalue,
+    f.fromstop,
+    f."id",
+    f.tostop
+from
+    fare f;
+
+select
+    f.farevalue,
+    f.fromstop,
+    f."id",
+    f.tostop
+
+from
+    fare f;select
+    f.farevalue,
+    f.fromstop,
+    f."id",
+    f.tostop
+from
+    fare f;

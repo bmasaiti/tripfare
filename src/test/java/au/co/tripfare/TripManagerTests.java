@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TripfareApplicationTests {
+class TripManagerTests {
 
-//	@Test
-//	void contextLoads() {
-//	}
 
 }
