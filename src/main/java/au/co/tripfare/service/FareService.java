@@ -1,7 +1,7 @@
 package au.co.tripfare.service;
 
-import au.co.tripfare.entities.Tap;
-import au.co.tripfare.entities.Trip;
+import au.co.tripfare.model.Tap;
+import au.co.tripfare.model.Trip;
 
 import java.util.List;
 

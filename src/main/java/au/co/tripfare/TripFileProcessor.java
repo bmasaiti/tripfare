@@ -1,7 +1,7 @@
 package au.co.tripfare;
 
-import au.co.tripfare.entities.Tap;
-import au.co.tripfare.entities.Trip;
+import au.co.tripfare.model.Tap;
+import au.co.tripfare.model.Trip;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import com.opencsv.bean.StatefulBeanToCsv;

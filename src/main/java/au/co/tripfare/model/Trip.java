@@ -1,4 +1,4 @@
-package au.co.tripfare.entities;
+package au.co.tripfare.model;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 import utils.TripStatus;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Builder
@@ -30,11 +31,11 @@ public class Trip {
     @CsvBindByName
     private String busId;
     @CsvBindByName
-    @CsvDate("DD-MM-YYYY HH:MM:SS")
-    private Date startTime;
+    @CsvDate("DD-MM-yyyy HH:MM:SS")
+    private LocalDateTime startTime;
     @CsvBindByName
-    @CsvDate("DD-MM-YYYY HH:MM:SS")
-    private Date endTime;
+    @CsvDate("DD-MM-yyyy HH:MM:SS")
+    private LocalDateTime endTime;
 
 
 }

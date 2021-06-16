@@ -1,7 +1,7 @@
 package au.co.tripfare;
 
-import au.co.tripfare.entities.Tap;
-import au.co.tripfare.entities.Trip;
+import au.co.tripfare.model.Tap;
+import au.co.tripfare.model.Trip;
 import au.co.tripfare.repository.FareRepository;
 import au.co.tripfare.service.FareService;
 import au.co.tripfare.service.FareServiceImpl;
