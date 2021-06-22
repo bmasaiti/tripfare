@@ -7,6 +7,7 @@
    Once build is successful , run the jar as below with two commandline args for input file and outputfile(to be created)
    
    java -jar build/libs/tripfare-0.0.1-SNAPSHOT.jar {absolute path to input csv file} {aboslute path to output file}
+   
    Navigate to the location of the output file to view the output
    
    ## Assumptions
