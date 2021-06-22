@@ -12,9 +12,9 @@ public interface FareRepository extends JpaRepository<Fare,Integer> {
     @Query(value = "Select f from Fare where f.fromStop = ?1 and f.toStop =?2")
     Fare findByFromStopANDToStop(String fromStop,String toStop);
 
-    @Query(value = "Select max(fare) from Fare")
+    @Query(value = "Select max(fareValue) from Fare")
     Fare findMaxFare();
 
-    @Query(value = "Select f from Fare f  Where f.fromStop = ?1")
+    @Query(nativeQuery = true, value = "Select max(fareValue) from Fare where fromStop = :stopId")
             Fare getMaxFareFromStop(String stopId);
 }
