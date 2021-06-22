@@ -1,16 +1,19 @@
-package au.co.tripfare.entities;
+package au.co.tripfare.model;
 
+import au.co.tripfare.utils.TripStatus;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import utils.TripStatus;
-import java.util.Date;
+import lombok.ToString;
+
+import java.time.LocalDateTime;
 
 @Builder
 @Setter
 @Getter
+@ToString
 public class Trip {
     @CsvBindByName
     private String pan;
@@ -23,20 +26,15 @@ public class Trip {
     @CsvBindByName
     private TripStatus tripStatus;
     @CsvBindByName
-    private String companyId   ;
+    private String companyId;
     @CsvBindByName
     private String busId;
     @CsvBindByName
-    @CsvDate("DD-MM-YYYY HH:MM:SS")
-    private Date startTime;
+    @CsvDate("DD-MM-yyyy HH:MM:SS")
+    private LocalDateTime startTime;
     @CsvBindByName
-    @CsvDate("DD-MM-YYYY HH:MM:SS")
-    private Date endTime;
+    @CsvDate("DD-MM-yyyy HH:MM:SS")
+    private LocalDateTime endTime;
 
-    @Override
-    public String toString() {
 
-        return startTime + "," + endTime + "," + (endTime.getTime() - startTime.getTime()) + "," + FromStop
-                + "," + toStop + "," + ChargeAmount + "," + companyId + "," + busId + "," + pan + "," + tripStatus;
-    }
 }

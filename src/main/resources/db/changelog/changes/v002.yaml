@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: faretable_seed
+      author: Budwell Masaiti
+      changes:
+        - sql:
+            sql: insert into fare(fromstop,tostop,farevalue) values ('stop1','stop2',3.25);
+        - sql:
+            sql: insert into fare(fromstop,tostop,farevalue) values ('stop1','stop3',7.30);
+        - sql:
+            sql: insert into fare(fromstop,tostop,farevalue) values ('stop2','stop3',5.50);

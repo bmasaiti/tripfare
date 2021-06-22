@@ -1,14 +1,10 @@
-package au.co.tripfare.entities;
+package au.co.tripfare.model;
 
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvBindByNames;
 import com.opencsv.bean.CsvDate;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import utils.TapType;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -17,8 +13,8 @@ import java.util.Date;
 public class Tap {
     @CsvBindByName
     private int id;
-    @CsvBindByName(column="DateTimeUTC" )
-    @CsvDate ("DD-MM-YYYY HH:MM:SS")
+    @CsvBindByName(column = "DateTimeUTC")
+    @CsvDate("DD-MM-yyyy HH:MM:SS")
     private Date tapTime;
     @CsvBindByName
     private String tapType;
