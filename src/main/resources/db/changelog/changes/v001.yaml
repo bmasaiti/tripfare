@@ -2,6 +2,8 @@ databaseChangeLog:
   - changeSet:
       id: create-table-fare
       author: Budwell Masaiti
+      validChecksum: 1
+      clearCheckSums: true
       preConditions:
         - onFail: MARK_RAN
           not:
@@ -14,8 +16,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     nullable: false
-                    primaryKey: true
-                    primaryKeyName: Id
+                    primaryKey: false
                   name: id
                   type: int
               - column:
@@ -26,6 +27,8 @@ databaseChangeLog:
               - column:
                   name: tostop
                   type: VARCHAR(250)
+                  constraints:
+                    nullable: false
               - column:
                   name: farevalue
                   type: float
@@ -37,6 +40,13 @@ databaseChangeLog:
             schemaName: public
             sequenceName: seqgen
             startValue: 1
+        - addPrimaryKey:
+            columnNames: fromstop,tostop
+            constraintName: pk_fare
+            schemaName: public
+            tableName: fare
+            validate: true
+
 
 
 

@@ -1,0 +1,51 @@
+--docker run --name postgres-db-server -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
+--psql -h localhost -U postgres -d postgres
+--create database faredb;
+--\c faredb
+--CREATE TABLE IF NOT EXISTS fare (
+--      id INT,AUTO_INCREMENT ,
+--      fromStop VARCHAR(20) NOT NULL,
+--      toStop VARCHAR(20) NOT NULL,
+--      fareValue FLOAT NOT NULL ,
+--      PRIMARY KEY (id,fromStop,toStop)
+--) ;
+--
+--insert into fare(fromstop,tostop,farevalue) values ('stop1','stop2',3.25);
+--insert into fare(fromstop,tostop,farevalue) values ('stop1','stop3',7.30);
+--insert into fare(fromstop,tostop,farevalue) values ('stop2','stop3',5.50);
+--
+--
+
+--Select f.farevalue from Fare f where f.fromStop ='stop1'  and f.toStop = 'stop2';
+--
+--
+--select
+--    f.farevalue,
+--    f.fromstop,
+--    f."id",
+--    f.tostop
+--from
+--    fare f;
+--
+-- select
+--    f.farevalue,
+--    f.fromstop,
+--    f."id",
+--    f.tostop
+--
+--from
+--    fare f;select
+--    f.farevalue,
+--    f.fromstop,
+--    f."id",
+--    f.tostop
+--from
+--    fare f;
+--
+--select
+--    f.farevalue,
+--    f.fromstop,
+--    f."id",
+--    f.tostop
+--from
+--    fare f;

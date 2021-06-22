@@ -1,4 +1,4 @@
-package utils;
+package au.co.tripfare.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,7 +8,9 @@ import java.util.Date;
 
 public class DateUtils {
 
-    private DateUtils(){}
+    private DateUtils() {
+    }
+
     public static Date convertStringDateToDate(String strDate) {
 
         SimpleDateFormat formatter = new SimpleDateFormat("DD-MM-yyyy HH:MM:SS");

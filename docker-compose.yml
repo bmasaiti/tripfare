@@ -1,8 +1,7 @@
-# docker-compose.yml
 version: '3'
 services:
   database:
-    image: "postgres"
+    image: postgres:latest
     hostname: postgres
     container_name: postgres
     ports:
@@ -17,7 +16,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/faredb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: mysecretpassword
     depends_on:

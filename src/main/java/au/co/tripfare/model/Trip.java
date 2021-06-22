@@ -1,15 +1,14 @@
 package au.co.tripfare.model;
 
+import au.co.tripfare.utils.TripStatus;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import utils.TripStatus;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Builder
 @Setter

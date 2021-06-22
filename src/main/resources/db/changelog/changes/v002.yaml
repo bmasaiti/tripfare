@@ -4,8 +4,8 @@ databaseChangeLog:
       author: Budwell Masaiti
       changes:
         - sql:
-            sql: insert into fare(id,fromstop,tostop,farevalue) values (1,'stop1','stop2',3.25);
+            sql: insert into fare(fromstop,tostop,farevalue) values ('stop1','stop2',3.25);
         - sql:
-            sql: insert into fare(id,fromstop,tostop,farevalue) values (2,'stop1','stop3',7.30);
+            sql: insert into fare(fromstop,tostop,farevalue) values ('stop1','stop3',7.30);
         - sql:
-            sql: insert into fare(id,fromstop,tostop,farevalue) values (3,'stop2','stop3',5.50);
+            sql: insert into fare(fromstop,tostop,farevalue) values ('stop2','stop3',5.50);

@@ -1,24 +1,32 @@
 package au.co.tripfare.service;
 
+
 import au.co.tripfare.model.Tap;
 import au.co.tripfare.model.Trip;
 import au.co.tripfare.repository.FareRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import au.co.tripfare.utils.DateUtils;
+import au.co.tripfare.utils.TripStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import utils.DateUtils;
-import utils.TripStatus;
+
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Objects;
+
 
 @Service
 public class FareServiceImpl implements FareService {
-    private  static final int ROUNDTRIPTIME = 20; //estimated round trip on bus to get back to same stop
+    private static final Logger LOG = LoggerFactory.getLogger(FareServiceImpl.class);
 
-   @Autowired
-    FareRepository fareRepository;
+    private static final int ROUNDTRIPTIME = 20; //estimated round trip on bus to get back to same stop
 
-    @Override
+    private final FareRepository fareRepository;
+
+    public FareServiceImpl(FareRepository fareRepository) {
+        this.fareRepository = fareRepository;
+    }
+
+
     public Trip processTap(Tap tap, List<Trip> incompleteTrips) {
         var unprocessedTrip = incompleteTrips.stream()
                 .filter(trip -> trip.getPan().equalsIgnoreCase(tap.getPan()))
@@ -52,9 +60,11 @@ public class FareServiceImpl implements FareService {
 
     private TripStatus checkTripStatus(Trip fromStop, Tap toStop) {
         TripStatus status = TripStatus.COMPLETED;
-        if (fromStop.getFromStop().equals(toStop.getStopId())) {
-            if (ChronoUnit.MINUTES.between(DateUtils.convertToLocalDateTimeViaInstant(toStop.getTapTime()),fromStop.getStartTime()) < ROUNDTRIPTIME)
-                status = TripStatus.CANCELLED;
+        if (fromStop.getFromStop().equals(toStop.getStopId())
+                && (ChronoUnit.MINUTES.between(DateUtils.convertToLocalDateTimeViaInstant(toStop.getTapTime()), fromStop.getStartTime())
+                < ROUNDTRIPTIME)) {
+            // if (ChronoUnit.MINUTES.between(DateUtils.convertToLocalDateTimeViaInstant(toStop.getTapTime()), fromStop.getStartTime()) < ROUNDTRIPTIME)
+            status = TripStatus.CANCELLED;
         }
         return status;
     }
@@ -62,13 +72,18 @@ public class FareServiceImpl implements FareService {
 
     private double calculateFare(String fromStop, String toStop, TripStatus tripStatus) {
         var fareValue = 0.0;
-        if ((tripStatus.equals(TripStatus.COMPLETED)) && (fromStop.equals(toStop))){
-            fareValue = fareRepository.findMaxFare().getFareValue();
-        } else if ((tripStatus.equals(TripStatus.COMPLETED)) && !Objects.equals(fromStop, toStop)) {
-            fareValue = fareRepository. findByFromStopANDToStop(fromStop, toStop).get(0).getFareValue();
+        try {
+            if ((tripStatus.equals(TripStatus.COMPLETED)) && (fromStop.equals(toStop))) {
+                fareValue = fareRepository.findByMaxFareValue();
+            } else if ((tripStatus.equals(TripStatus.COMPLETED))) {
+                var farr = fareRepository.findFirstByFromStopAndToStop(fromStop, toStop);
+                fareValue = farr.getFareValue();
+            }
+        } catch (NullPointerException ex) {
+            LOG.error("Fare not found in db", ex.getLocalizedMessage());
+            ex.getLocalizedMessage();
         }
         return fareValue;
     }
-
 
 }

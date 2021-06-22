@@ -1,4 +1,4 @@
-package utils;
+package au.co.tripfare.utils;
 
 
 public class Stop {

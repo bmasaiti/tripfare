@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.1'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.5.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
 
 group = 'au.co.tripfare'
@@ -9,32 +9,38 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
 
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	//implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
-	implementation group: 'com.opencsv', name: 'opencsv', version: '5.4'
-	implementation 'org.liquibase:liquibase-core:4.3.1'
-	runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.projectlombok:lombok:1.18.16'
+    testImplementation 'junit:junit:4.12'
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'com.h2database', name: 'h2', version: '1.4.193'
+    implementation group: 'com.opencsv', name: 'opencsv', version: '5.4'
+    implementation 'org.liquibase:liquibase-core:4.3.1'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.9.0'
+//    testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+    testImplementation group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
+
 
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
